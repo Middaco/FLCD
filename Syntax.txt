@@ -21,7 +21,6 @@ Sintactical rules:
 				<listIdentifierList>
 
 <listsIdentifier> ::= string
-
 <listLength> ::= integer
 
 
