@@ -1,0 +1,55 @@
+Alphabet:
+
+a. Upper (A-Z) and lower case letters (a-z) of the English alphabet
+
+b. Underline character '_';
+
+c. Decimal digits (0-9);
+
+	1. Lexic:
+
+		a.Special symbols, representing:
+
+			- operators + - * / // assign
+
+			- separators [ ] ( ) , : ; space -- 
+
+			- reserved words: char string boolean integer double if else read print loop stop inc let
+
+		b.identifiers
+
+			-a sequence of letters and  digits, such that the first character is a letter; the rule is:
+
+				<identifier> ::= <character> | <character><identifier>
+				<character> ::= <letter>|<letter><digit>
+				<letter> ::= a|b|...|z|A|B|...|Z|
+				<digit> ::= 0|1|...|9
+
+		c.constants
+
+			1.integer - rule:
+				<int>::= 0 | <non-zero>
+				<non-zero> ::= <no>|-<no>|+<no>
+				<no> ::= <nzdigit>|<nzdigit><digitseq>
+				<digitseq>::= <digit>|<digit><digitseq>
+				<digit>::= 0|<nzdigit>
+				<nzdigit>::=1|...|9
+
+			2.char:
+				<character> ::= 'a'|'b'|...|'z'|'A'|'B'|...|'Z'|...'0'|'1'|...|'9'
+
+			3.string:
+      				<string> ::= ""|"<character>"|"<character><string>" 
+      				<character> ::= a|b|...|z|A|B|...|Z|...0|1|...|9
+
+			4.boolean:
+				<bool> ::= 0|1
+
+			5.double:	
+				<double> = <int>,<no>
+				<int>::= 0 | <non-zero>
+				<non-zero> ::= <no>|-<no>|+<no>
+				<no> ::= <nzdigit>|<nzdigit><digitseq>
+				<digitseq>::= <digit>|<digit><digitseq>
+				<digit>::= 0|<nzdigit>
+				<nzdigit>::=1|...|9
