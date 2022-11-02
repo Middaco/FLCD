@@ -2,6 +2,7 @@ The words - predefined tokens are specified between " and ":
 
 Sintactical rules:
 
+
 <program> ::= <decllist>|<cmpdstmt>
 
 
@@ -19,6 +20,7 @@ Sintactical rules:
 
 <listIdentifierList> ::= <listIdentifier>:<listLength>|<listIdentifier>:<listLength>
 				<listIdentifierList>
+
 
 <listsIdentifier> ::= string
 <listLength> ::= integer

@@ -1,0 +1,16 @@
+--Makes sum of n numbers
+
+let n sum integer
+let list:n []
+
+assign(sum, 0)
+read(n)
+read(list)
+
+loop:
+	if(list.pos() = n)
+		stop
+	else
+		assign(sum, sum+list.elem())
+		list.next()
+print(sum)	
