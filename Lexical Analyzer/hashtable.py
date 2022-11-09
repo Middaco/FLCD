@@ -1,18 +1,20 @@
 class HashTable:
-    def __init__(self, size):
-        self.__size = size
+    def __init__(self):
         self.__elems = {}
+        self.len = 0
 
     def add(self, elem):
         pos = self.hash(elem)
-        if self.search(elem, pos) == -1:
+        if self.search(elem) == -1:
             self.__elems.update({self.hash(elem): elem})
+            self.len += 1
         return pos
 
     def resize(self, new_size):
         pass
 
-    def search(self, elem, pos):
+    def search(self, elem):
+        pos = self.hash(elem)
         if self.__elems.get(pos) == elem:
             return pos
         return -1
