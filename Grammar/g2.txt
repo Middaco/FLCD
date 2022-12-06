@@ -1,0 +1,60 @@
+<program> ::= <decllist>|<cmpdstmt>
+P -> D | C
+
+<decllist> ::= <declaration>|<listDecl>|<listDecl><decllist>|<declaration><decllist>
+D -> d | L | L D | d D
+
+<declaration> ::= let <decIdentifierList> <type>
+d -> let I T
+
+<decIdentifierList> ::= <decIdentifier>|<decIdentifier> <decIddentifierList>
+I -> i | i I
+
+<decIdentifier> ::= string
+i -> string
+
+<type> ::= boolean | char | integer | double
+T -> boolean | char | integer | double
+
+<listDecl> ::= let <listIdentifierList> []
+L -> let l []
+
+<listIdentifierList> ::= <listIdentifier>:<listLength>|<listIdentifier>:<listLength><listIdentifierList>
+
+
+<listsIdentifier> ::= string
+li -> string
+<listLength> ::= integer
+ll -> integer
+
+<cmpdstmt> ::= <stmtlist>
+
+<stmtlist> ::= <stmt> | <stmt><stmtlist>
+
+<stmt> ::= <simplstmt> | <structstmt>
+
+<simplstmt> ::= <assignstmt> | <iostmt>
+
+<assignstmt> ::= assign(identifier, <expression>)
+
+<expression> ::= <expression> "+" <term> | <expression> "-" <term> | <term>
+
+<term> ::= <term> "*" <factor> | <term> "/" <factor> | <term> "//" <factor> | <factor>
+
+<factor> ::= "(" <expression> ")" | identifier | <const>
+
+<const> ::= int | double | bool | string | character
+
+<istmt> ::= read(identifier) 
+
+<ostmt> ::= print(identifier) | print(<const>)
+
+<structstmt> ::= <cmpdstmt> | <ifstmt> | <whilestmt>
+
+<ifstmt> ::= if (<condition>) <stmt> | if (<condition>) <stmt> else <stmt>
+
+<condition> ::= <expression> <RELATION> <expression> 
+
+<whilestmt> ::= loop <stmt>
+
+<RELATION> ::= < | <= | = | != | >= | >
