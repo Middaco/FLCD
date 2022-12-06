@@ -1,9 +1,11 @@
-file = transitions "\n" states "\n" future_states "\n" {future_states}
+file = alphabet "\n" states "\n" transitions "\n"
 
-transitions = transition{ transition}
-transition = "0"|...|"9"
+alphabet = "0"|...|"9"
 
 states = state{ state}
-state = "a"|"b"|...|"z"
+state = "q1"|"q2"|...|"qf"
 
-future_states = "{" state{,state} "}"
+transitions = transition{ transition}
+transition = "("state{,state}")"
+
+
