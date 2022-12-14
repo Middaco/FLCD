@@ -23,9 +23,9 @@ L -> let l []
 
 
 <listsIdentifier> ::= string
-li -> string
+lI -> string
 <listLength> ::= integer
-ll -> integer
+lL -> integer
 
 <cmpdstmt> ::= <stmtlist>
 

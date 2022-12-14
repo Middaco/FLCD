@@ -3,6 +3,7 @@ class Grammar:
         self.read_grammar(file_name)
         terms = []
         non_terms = []
+        productions = []
 
     def read_grammar(self, file_name):
         grammar = open(file_name, 'r')

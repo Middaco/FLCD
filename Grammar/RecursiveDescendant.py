@@ -1,10 +1,13 @@
 class RecursiveDescendant:
-    def __init__(self, sequence, final_config):
+    def __init__(self, start_symbol, productions, final_config):
         self.__work_stack = []
-        self.__input_stack = list(sequence)
+        self.__input_stack = list(start_symbol)
+        self.__productions = productions
         self.__state = 'q'
         self.__index = 1
         self.__final_config = final_config
+        # 0 - info 1 - parent 2 - right sibling
+        self.__parsing_tree = [[start_symbol], [0], [0]]
 
     def expand(self):
         self.__work_stack.append([self.__input_stack.pop(), 1])
@@ -24,12 +27,13 @@ class RecursiveDescendant:
     def another_try(self):
         self.__state = 'q'
         if self.__work_stack[-1][0].next():
+            self.__state = 'q'
             self.__work_stack[-1][1] += 1
             self.__input_stack[0] = self.__work_stack[-1][0].production(self.__work_stack[-1][1])
-        elif # conditie:
-            # ce fac aici?
-        else:
+        elif self.__index == 1 and self.__work_stack[-1] == 'S':
             self.__state = 'e'
+        else:
+            pass
 
     def success(self):
         self.__state = 'f'
@@ -55,4 +59,3 @@ class RecursiveDescendant:
             print("Error")
         else:
             print("Sequence accepted")
-
