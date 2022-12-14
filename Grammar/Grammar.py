@@ -7,6 +7,8 @@ class Grammar:
     def read_grammar(self, file_name):
         grammar = open(file_name, 'r')
         lines_grammar = grammar.readlines()
+        for line in lines_grammar:
+            pass
 
     def print_nonTerms(self):
         pass

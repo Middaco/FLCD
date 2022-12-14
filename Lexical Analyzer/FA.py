@@ -13,7 +13,6 @@ class FA:
     def findInitialState(self):
         dict_transition_list = self.__transitions.values()
         state = 0
-        # posibil să fie o problemă aici
         state_freq_list = [0] * len(self.__states)
         for transition_list in dict_transition_list:
             for transition in transition_list:
