@@ -23,6 +23,26 @@ class Grammar:
                 elif non_term_regex.fullmatch(symb) and symb not in self.__non_terms:
                     self.__non_terms.append(symb)
 
+    def get_start_symbol(self):
+        return self.__non_terms[0]
+
+    def get_productions(self):
+        return self.__productions
+
+    def is_nonterm(self, non_term):
+        try:
+            self.__non_terms.index(non_term)
+            return True
+        except(ValueError):
+            return False
+
+    def is_term(self, term):
+        try:
+            self.__terms.index(term)
+            return True
+        except(ValueError):
+            return False
+
     def print_nonTerms(self):
         print(self.__non_terms)
 

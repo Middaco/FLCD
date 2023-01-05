@@ -1,30 +1,34 @@
+from Grammar import Grammar
+
+
 class RecursiveDescendant:
-    def __init__(self, start_symbol, productions, final_config):
+    def __init__(self, grm, final_config):
         self.__work_stack = []
-        self.__input_stack = list(start_symbol)
-        self.__productions = productions
+        self.__grm = grm
+        self.__input_stack = list(grm.get_start_symbol())
+        self.__productions = grm.get_productions()
         self.__state = 'q'
         self.__index = 1
         self.__final_config = final_config
         # 0 - info 1 - parent 2 - right sibling
-        self.__parsing_tree = [[start_symbol], [0], [0]]
+        self.__parsing_tree = [[grm.get_start_symbol()], [0], [0]]
 
-    def expand(self):
+    def __expand(self):
         self.__work_stack.append([self.__input_stack.pop(), 1])
         self.__input_stack.insert(0, self.__work_stack[-1][0].production(self.__work_stack[-1][1]))
 
-    def advance(self):
+    def __advance(self):
         self.__index += 1
         self.__work_stack.append(self.__input_stack.pop())
 
-    def momentary_insuccess(self):
+    def __momentary_insuccess(self):
         self.__state = 'b'
 
-    def back(self):
+    def __back(self):
         self.__index -= 1
         self.__input_stack.insert(0, self.__work_stack.pop(-1))
 
-    def another_try(self):
+    def __another_try(self):
         self.__state = 'q'
         if self.__work_stack[-1][0].next():
             self.__state = 'q'
@@ -35,27 +39,32 @@ class RecursiveDescendant:
         else:
             pass
 
-    def success(self):
+    def __success(self):
         self.__state = 'f'
 
     def run(self):
         while self.__state != 'f' and self.__state != 'e':
             if self.__state == 'q':
                 if self.__index == len(self.__final_config)+1 and len(self.__input_stack) == 0:
-                    self.success()
+                    self.__success()
                 else:
-                    if self.__input_stack[0].is_nonterm():
-                        self.expand()
-                    elif self.__input_stack[0].is_term():
-                        self.advance()
+                    if self.__grm.is_nonterm(self.__input_stack[0]):
+                        self.__expand()
+                    elif self.__grm.is_term(self.__input_stack[0]):
+                        self.__advance()
                     else:
-                        self.momentary_insuccess()
+                        self.__momentary_insuccess()
             elif self.__state == 'b':
-                if self.__work_stack[-1].is_term():
-                    self.back()
+                if self.__grm.is_term(self.__work_stack[-1]):
+                    self.__back()
                 else:
-                    self.another_try()
+                    self.__another_try()
         if self.__state == 'e':
             print("Error")
         else:
             print("Sequence accepted")
+
+
+grammar = Grammar("seminar_grammar.txt")
+rec = RecursiveDescendant(grammar, "a a c b c")
+rec.run()
