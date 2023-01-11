@@ -60,11 +60,3 @@ class Grammar:
 
     def CFG_check(self):
         pass
-
-
-gr = Grammar("seminar_grammar.txt")
-gr.print_terms()
-gr.print_nonTerms()
-gr.print_productions()
-gr.print_productions_nonTerms("S")
-print(gr.get_productions_nonTerms("S"))

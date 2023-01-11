@@ -32,15 +32,22 @@ class RecursiveDescendant:
         self.__input_stack.insert(0, self.__work_stack.pop(-1))
 
     def __another_try(self):
-        self.__state = 'q'
-        if len(self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])) <= self.__work_stack[-1][1]+1:
+        if len(self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])) >= self.__work_stack[-1][1]+1:
             self.__state = 'q'
+            prod_tobe_popped = self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])[self.__work_stack[-1][1]-1].split()
+            for i in prod_tobe_popped:
+                self.__input_stack.pop(0)
             self.__work_stack[-1][1] += 1
-            self.__input_stack[0] = self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])[self.__work_stack[-1][1]-1]
+            prods = self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])[self.__work_stack[-1][1]-1].split()
+            prods.reverse()
+            for prod in prods:
+                self.__input_stack.insert(0, prod)
         elif self.__index == 1 and self.__work_stack[-1] == self.__grm.get_start_symbol():
             self.__state = 'e'
         else:
-            pass
+            self.__input_stack.pop(0)
+            self.__input_stack.insert(0, self.__work_stack[-1][0])
+            self.__work_stack.pop(-1)
 
     def __success(self):
         self.__state = 'f'
@@ -53,7 +60,7 @@ class RecursiveDescendant:
                 else:
                     if self.__grm.is_nonterm(self.__input_stack[0]):
                         self.__expand()
-                    elif self.__input_stack[0] == self.__final_config[self.__index-1]:
+                    elif self.__index <= len(self.__final_config) and self.__input_stack[0] == self.__final_config[self.__index-1] :
                         self.__advance()
                     else:
                         self.__momentary_insuccess()
