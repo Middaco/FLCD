@@ -43,6 +43,9 @@ class Grammar:
         except(ValueError):
             return False
 
+    def get_productions_nonTerms(self, non_terminal):
+        return [prod.strip() for prod in str(self.__productions.get(non_terminal)).split('|')]
+
     def print_nonTerms(self):
         print(self.__non_terms)
 
@@ -59,8 +62,9 @@ class Grammar:
         pass
 
 
-gr = Grammar("g2.txt")
+gr = Grammar("seminar_grammar.txt")
 gr.print_terms()
 gr.print_nonTerms()
 gr.print_productions()
-gr.print_productions_nonTerms("D")
+gr.print_productions_nonTerms("S")
+print(gr.get_productions_nonTerms("S"))

@@ -14,12 +14,15 @@ class RecursiveDescendant:
         self.__parsing_tree = [[grm.get_start_symbol()], [0], [0]]
 
     def __expand(self):
-        self.__work_stack.append([self.__input_stack.pop(), 1])
-        self.__input_stack.insert(0, self.__work_stack[-1][0].production(self.__work_stack[-1][1]))
+        self.__work_stack.append([self.__input_stack.pop(0), 1])
+        prods = self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])[self.__work_stack[-1][1]-1].split()
+        prods.reverse()
+        for prod in prods:
+            self.__input_stack.insert(0, prod)
 
     def __advance(self):
         self.__index += 1
-        self.__work_stack.append(self.__input_stack.pop())
+        self.__work_stack.append(self.__input_stack.pop(0))
 
     def __momentary_insuccess(self):
         self.__state = 'b'
@@ -30,11 +33,11 @@ class RecursiveDescendant:
 
     def __another_try(self):
         self.__state = 'q'
-        if self.__work_stack[-1][0].next():
+        if len(self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])) <= self.__work_stack[-1][1]+1:
             self.__state = 'q'
             self.__work_stack[-1][1] += 1
-            self.__input_stack[0] = self.__work_stack[-1][0].production(self.__work_stack[-1][1])
-        elif self.__index == 1 and self.__work_stack[-1] == 'S':
+            self.__input_stack[0] = self.__grm.get_productions_nonTerms(self.__work_stack[-1][0])[self.__work_stack[-1][1]-1]
+        elif self.__index == 1 and self.__work_stack[-1] == self.__grm.get_start_symbol():
             self.__state = 'e'
         else:
             pass
@@ -50,7 +53,7 @@ class RecursiveDescendant:
                 else:
                     if self.__grm.is_nonterm(self.__input_stack[0]):
                         self.__expand()
-                    elif self.__grm.is_term(self.__input_stack[0]):
+                    elif self.__input_stack[0] == self.__final_config[self.__index-1]:
                         self.__advance()
                     else:
                         self.__momentary_insuccess()
@@ -66,5 +69,5 @@ class RecursiveDescendant:
 
 
 grammar = Grammar("seminar_grammar.txt")
-rec = RecursiveDescendant(grammar, "a a c b c")
+rec = RecursiveDescendant(grammar, "aacbc")
 rec.run()
