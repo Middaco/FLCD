@@ -1,0 +1,25 @@
+I implemented the Recursive Descendant parser
+
+Input:
+    -grm - obj of type Grammar
+    -final-config - string symbolising the final configuration
+
+Output:
+    -prints to "out1.txt" the production string
+    -prints on the screen the production string
+    -prints "Sequence accepted" if the given grammar was accepted by the parser
+
+Methods used:
+    -expand - non-terminal is at the top of the input stack; append it to the working stack in a list along
+    with the digit '1', this being the index of the current production, and push the production to the input stack
+    -advance - if head of the input stack matches the current symbol of final_config, increment the index and
+    append the head to the work stack by popping it from the input stack
+    -momentarry_insuccess - head of the input stack is a terminal that doesn't match the current symbol of final_config;
+    change the state to 'b'
+    -back - head of working stack is a terminal, decrement the index and push it to the input stack
+    -another-try
+        - head of working stack is a terminal and it still has productions to be added -> pop the previous production,
+        increment the index of the current production and add the productions to the input stack
+        - head of working stack is the starting symbol of the grammar and the index is '1' -> state changed to 'e'
+    -success - change the state to 'f'
+    -run - parser algorithm Recursive Descendant
