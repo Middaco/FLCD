@@ -1,0 +1,25 @@
+A -> B | C
+B -> D | E | E F | D F
+D -> l G H
+G -> I | I G
+I -> s
+H -> b | c | i | d
+E -> l G []
+G -> I : J | I : J G
+J -> i
+C -> K
+K -> L | L M
+L -> N | O
+N -> P | Q | V
+P -> a ( o , R )
+R -> R + S | R - S | S
+S -> S * T | S / T | S // T | T
+T -> ( R ) | o | U
+U -> a | b | c | d | e
+Q -> f ( o )
+V -> p ( o ) | p ( U )
+O -> C | W | X
+W -> h ( X ) L | h ( X ) L k L
+X -> R Y R
+Z -> j L
+Y -> < | <= | = | != | >= | >
