@@ -1,0 +1,11 @@
+file = alphabet "\n" states "\n" transitions "\n"
+
+alphabet = "0"|...|"9"
+
+states = state{ state}
+state = "q1"|"q2"|...|"qf"
+
+transitions = transition{ transition}
+transition = "("state{,state}")"
+
+

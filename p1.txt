@@ -1,0 +1,9 @@
+--Computes the max of two integer numbers a and b
+
+let a b integer
+read(a)
+read(b)
+if (a = b)
+	print(a)
+else	
+	print(b)

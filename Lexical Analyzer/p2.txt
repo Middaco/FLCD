@@ -1,0 +1,17 @@
+--Verify if a number is prime
+
+let a b flag integer
+read(a)
+assign(b,2)
+assign(flag, 0)
+loop:
+	if(b < a//2)
+		if(a%b = 0)
+			inc(b)
+		else
+			print("Not prime") --if bigger or equal
+			assign(flag,1)
+			stop	
+				
+if(flag=0)
+	print("Prime")

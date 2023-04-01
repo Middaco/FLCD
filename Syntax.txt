@@ -1,0 +1,61 @@
+The words - predefined tokens are specified between " and ":
+
+Sintactical rules:
+
+
+<program> ::= <decllist>|<cmpdstmt>
+
+
+<decllist> ::= <declaration>|<listDecl>|<listDecl><decllist>|<declaration><decllist>
+
+<declaration> ::= let <decIdentifierList> <type>
+
+<decIdentifierList> ::= <decIdentifier>|<decIdentifier> <decIddentifierList>
+
+<decIdentifier> ::= string
+
+<type> ::= boolean | char | integer | double | boolean 
+
+<listDecl> ::= let <listIdentifierList> []
+
+<listIdentifierList> ::= <listIdentifier>:<listLength>|<listIdentifier>:<listLength>
+				<listIdentifierList>
+
+
+<listsIdentifier> ::= string
+<listLength> ::= integer
+
+
+<cmpdstmt> ::= <stmtlist>
+
+<stmtlist> ::= <stmt> | <stmt><stmtlist>
+
+<stmt> ::= <simplstmt> | <structstmt>
+
+<simplstmt> ::= <assignstmt> | <iostmt>
+
+<assignstmt> ::= assign(identifier, <expression>)
+
+<expression> ::= <expression> "+" <term> | <expression> "-" <term> | <term>
+
+<term> ::= <term> "*" <factor> | <term> "/" <factor> | <term> "//" <factor> | <factor>
+
+<factor> ::= "(" <expression> ")" | identifier | <const>
+
+<const> ::= int | double | bool | string | character
+
+<istmt> ::= read(identifier) 
+
+<ostmt> ::= print(identifier) | print(<const>)
+
+<const> ::= int | double | bool |
+
+<structstmt> ::= <cmpdstmt> | <ifstmt> | <whilestmt>
+
+<ifstmt> ::= if (<condition>) <stmt> | if (<condition>) <stmt> else <stmt>
+
+<condition> ::= <expression> <RELATION> <expression> 
+
+<whilestmt> ::= loop <stmt>
+
+<RELATION> ::= < | <= | = | != | >= | >
